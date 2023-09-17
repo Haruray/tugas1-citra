@@ -17,6 +17,9 @@ classdef ImageManipulation
        end
        function contrastStretch = contrastStretching(img)
            custHist = CustomHist;
+           if (length(size(img)) == 3)
+               img = 
+           end
            [~, ~, channels] = size(img);
            stretchedChannels = zeros(size(img));
            for ch=1:channels
@@ -24,7 +27,8 @@ classdef ImageManipulation
                pixelsFlatten = custHist.getPixelFlatten(processedImg);
                rmin = min(pixelsFlatten);
                rmax = max(pixelsFlatten);
-               stretchedChannels(:,:,ch) = (processedImg - rmin).*(255/(rmax-rmin));
+               img = im2double(img);
+               stretchedChannels(:,:,ch) = (img(:,:,ch) - rmin).*(255/(rmax-rmin));
            end
            contrastStretch = uint8(stretchedChannels);
        end

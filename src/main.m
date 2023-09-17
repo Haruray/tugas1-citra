@@ -1,7 +1,8 @@
 customHistogram = CustomHist;
-img = imread('../data/colored/Lena512warna.bmp');
-pixelsFlatten = customHistogram.getHistImg(img);
-%imageManip = ImageManipulation;
-%newImg = imageManip.contrastStretching(img);
+img = imread('../data/grayscaled/Lena.bmp');
+imageManip = ImageManipulation;
+newImg = imageManip.contrastStretching(img);
+imshow(newImg);
+%customHistogram.getHistImg(newImg);
 
 
