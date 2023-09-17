@@ -15,7 +15,7 @@ classdef CustomHist
     function histImg = getHistImg(img)
         pixelsFlatten = CustomHist.getPixelFlatten(img);
         uniqueVals = unique(pixelsFlatten);
-        freq = histc(pixelsFlatten,uniqueVals);
+        freq = histcounts(pixelsFlatten,uniqueVals);
         histImg = bar(uniqueVals, freq);
         xlabel('Pixel Value');
         ylabel('Frequency');
