@@ -1,0 +1,18 @@
+classdef CustomHist
+   methods
+      function pixelsFlatten = getPixelFlatten(img)
+        [row, col] = size(img)
+        pixelsFlatten = zeros(row+col, 1)
+        for i=1:row
+            for j=1:col
+                pixelsFlatten(i+j) = img(i,j)
+            end
+        end
+    end
+    
+    function histImg = getHistImg(img)
+        pixelsFlatten=getPixelFlatten(img)
+        histImg=histogram(pixelsFlatten)
+    end
+   end
+end
