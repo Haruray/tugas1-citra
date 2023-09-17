@@ -1,27 +1,14 @@
 classdef CustomHist
    methods (Static)
       function pixelsFlatten = getPixelFlatten(img)
-        imgSize = size(img);
-        if (length(imgSize) == 3)
-            [row, col, channel] = size(img);
-            pixelsFlatten = zeros(channel, channel);
-            for ch=1:channel
-                imgChannel = img(:,:,ch);
-                k = 1;
-                for i=1:row
-                    for j=1:col
-                        pixelsFlatten(k, ch) = imgChannel(i,j);
-                        k = k+1;
-                    end
-                end
-            end
-        else
-            [row, col] = size(img);
-            pixelsFlatten = zeros(row*col, 1);
+        [row, col, channel] = size(img);
+        pixelsFlatten = zeros(channel, channel);
+        for ch=1:channel
+            imgChannel = img(:,:,ch);
             k = 1;
             for i=1:row
                 for j=1:col
-                    pixelsFlatten(k) = img(i,j);
+                    pixelsFlatten(k, ch) = imgChannel(i,j);
                     k = k+1;
                 end
             end
