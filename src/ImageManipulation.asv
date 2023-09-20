@@ -29,11 +29,11 @@ classdef ImageManipulation
        function histEqImg = histogramEqual(img)
            hist = CustomHist;
            
-           histEqImg = img;
+           histEqImg = zeros(size(img));
            
            [freq, ~] = hist.getHistData(img);
            [height, width, ~] = size(img);
-           histEq = zeros(height, 1);
+           histEq = zeros(height);
            NPixels = height * width;
            NGray = 255;
            for i=1:NGray
@@ -43,7 +43,6 @@ classdef ImageManipulation
                end
                histEq(i) = floor(NGray * sum);
            end
-           disp(histEq)
            for i=1:height
                for j=1:width
                    histEqImg(i,j) = histEq(img(i,j));

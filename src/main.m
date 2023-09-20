@@ -1,10 +1,8 @@
 customHistogram = CustomHist;
-img = imread('../data/colored/Lena512warna.bmp');
+img = imread('../data/grayscaled/Lena.bmp');
 imageManip = ImageManipulation;
-newImg = imageManip.imageNegative(img);
-imshow(newImg);
-customHistogram.getHistImg(newImg);
-[freq, uniqueVals] = customHistogram.getHistData(img);
-disp(freq)
+histEqImg = imageManip.histogramEqual(img);
+imshow(histEqImg);
+%customHistogram.getHistImg(newImg);
 
 
