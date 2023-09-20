@@ -27,28 +27,33 @@ classdef ImageManipulation
            contrastStretch = uint8(stretchedChannels);
        end
        function histEqImg = histogramEqual(img)
+           [height, width, channel] = size(img);
            hist = CustomHist;
-           
            histEqImg = img;
+           for ch=1:channel
+               imageChannel = img(:,:,ch);
            
-           [freq, ~] = hist.getHistData(img);
-           [height, width, ~] = size(img);
-           histEq = zeros(height, 1);
-           NPixels = height * width;
-           NGray = 255;
-           for i=1:NGray
-               sum = 0;
-               for j=1:i
-                   sum = sum + (freq(j) / NPixels);
+               [freq, ~] = hist.getHistData(imageChannel);
+               
+               histEq = zeros(height, 1);
+               NPixels = height * width;
+               NGray = 255;
+               for i=1:NGray
+                   sum = 0;
+                   for j=1:i
+                       sum = sum + (freq(j) / NPixels);
+                   end
+                   histEq(i) = floor(NGray * sum);
                end
-               histEq(i) = floor(NGray * sum);
-           end
-           disp(histEq)
-           for i=1:height
-               for j=1:width
-                   histEqImg(i,j) = histEq(img(i,j));
+               for i=1:height
+                   for j=1:width
+                       histEqImg(i,j, channel) = histEq(imageChannel(i,j)+1);
+                   end
                end
            end
+           histEqImg = uint8(histEqImg);
+       end
+       function histSpec = histogramSpecification(img)
        end
    end
 end

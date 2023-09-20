@@ -1,5 +1,5 @@
 customHistogram = CustomHist;
-img = imread('../data/grayscaled/Lena.bmp');
+img = imread('../data/colored/Lena512warna.bmp');
 imageManip = ImageManipulation;
 histEqImg = imageManip.histogramEqual(img);
 imshow(histEqImg);
