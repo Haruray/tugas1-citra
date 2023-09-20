@@ -61,7 +61,7 @@ classdef ImageManipulation
        end
        function histSpec = histogramSpecification(img, ref)
            [height, width, channel] = size(img);
-           [heightRef, widthRef, channelRef] = size(ref);
+           [~, ~, channelRef] = size(ref);
            hist = CustomHist;
            histSpec = img;
            NGray = 255;
