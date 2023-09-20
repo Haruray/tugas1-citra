@@ -1,35 +1,16 @@
 classdef CustomHist
    methods (Static)
-      function pixelsFlatten = getPixelFlatten(img)
-        [row, col, channel] = size(img);
-        pixelsFlatten = zeros(channel, channel);
-        for ch=1:channel
-            imgChannel = img(:,:,ch);
-            k = 1;
-            for i=1:row
-                for j=1:col
-                    pixelsFlatten(k, ch) = imgChannel(i,j);
-                    k = k+1;
-                end
-            end
-        end
-    end
-    
     function histImg = getHistImg(img)
-        pixelsFlatten = CustomHist.getPixelFlatten(img);
-        [~, channels] = size(pixelsFlatten);
         binEdges = 0:255;
-        for ch = 1:channels
-            pixelsFlattenSliced = pixelsFlatten(:, ch);
-            
-            [freq, uniqueVals] = histcounts(pixelsFlattenSliced, binEdges);
-
-            histImg = subplot(channels, 1, ch);
-            bar(uniqueVals(1:end-1), freq)
-            xlabel('Pixel Value');
-            ylabel('Frequency');
-            title(sprintf('Channel %d Histogram', ch));
-        end
+        [freq, uniqueVals] = histcounts(img, binEdges);
+        histImg = bar(uniqueVals(1:end-1), freq);
+        xlabel("Pixel Value");
+        ylabel("Frequency");
+        title("Image Histogram");
+    end
+    function [freq, uniqueVals] = getHistData(img)
+        binEdges = 0:255;
+        [freq, uniqueVals] = histcounts(img, binEdges);
     end
    end
 end
